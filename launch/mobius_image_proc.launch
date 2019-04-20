@@ -1,0 +1,9 @@
+<launch>
+  <group ns="usb_cam" >
+    <node name="image_proc" pkg="image_proc" type="image_proc" respawn="false" output="screen" />
+  </group>
+  <node name="image_view_rect" pkg="image_view" type="image_view" respawn="false" output="screen">
+    <remap from="image" to="/usb_cam/image_rect_color" />
+    <param name="autosize" value="true" />
+  </node>
+</launch>

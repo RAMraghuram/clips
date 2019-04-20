@@ -1,0 +1,16 @@
+<launch>
+  <node name="cam0" pkg="usb_cam" type="usb_cam_node" output="screen" >
+    <param name="video_device" value="/dev/video1" />
+    <param name="image_width" value="640" />
+    <param name="image_height" value="480" />
+    <param name="framerate" value="30" />
+    <param name="pixel_format" value="h264" />
+    <param name="color_format" value="yuv420p" />
+    <param name="camera_frame_id" value="usb_cam" />
+    <param name="io_method" value="mmap"/>
+  </node>
+  <include file="$(find mavros)/launch/px4.launch" />
+  <group ns="cam0">
+    <node name="image_proc" pkg="image_proc" type="image_proc" respawn="false" output="screen"/>
+  </group>
+</launch>
